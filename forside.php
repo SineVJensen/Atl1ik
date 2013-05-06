@@ -1,18 +1,16 @@
 <?php
-	// Create connection
-	$username = '846259_admin';
-	$password = '123456';
-	$host = 'baneturnering.zymichost.com';
-	$db = 'baneturnering_zymichost_atl1ik';
+ /* Dokumentation: http://www.killersites.com/community/index.php?/topic/3064-basic-php-system-view-edit-add-delete-records-with-mysqli/ */
+session_start();
+$host = "baneturnering.zymichost.com";
+$username = "846259_admin";
+$password = "123456";
+$db = "baneturnering_zymichost_atl1ik";
 
-	try {
-    		$con = new PDO('mysql:host=baneturnering_zymichost_atl1ik;dbname='.$db, $username, $password);
-	}
-	catch (PDOException $e) {
-		print "Error!: " . $e->getMessage() . "<br/>";
-		die();
-	}
+// connect to the database
+$mysqli = new mysqli($host, $username, $password, $db);
 
+// show errors (remove this line if on a live site)
+mysqli_report(MYSQLI_REPORT_ERROR);
 
 ?>
 <HTML xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
@@ -41,58 +39,59 @@
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/datatables.css?ver=1.7");
 		/* ]]> */
 	</style></head>
-	<body>
-		<a href="login.php">[Admin]	</a>	
-		<center>
-			<H1> Kommende St&aelig;vner </H1>
 
-			For tilmelding tryk p&aring; rundenavn.
-			<br><br>
-
-			<table>
-				<tr>
-					<th>
-						Runde
-					</th>	
-					<th>
-						Dato
-					</th>
-					<th>
-						Distancer
-					</th>
-					<th>
-						Arrang&oslash;r
-					</th>
-					<th>
-						Tilmeldingsperiode
-					</th>
-				</tr>
-				<?php
-				$sql="SELECT * FROM runder";
-				$runder = $con->query($sql)->fetchAll();
-				foreach($runder as $runde){
-				?>
-				<tr>
-					<td>
-						<a href="deltagerTilmeld.php?rundeNavn=<?php echo $runde['rundeNavn']; ?>">
-							<?php echo $runde['rundeNavn']; ?>
-						</a>
-					</td>
-					<td><?php echo $runde['dato']; ?></td>
-					<td><?php  
-						$sql2="SELECT distance FROM distancer WHERE rundeNavn='".$runde['rundeNavn']."'";
-						$distancer = $con->query($sql2)->fetchAll();
-						foreach($distancer as $distance){
-							echo " ".$distance['distance']."m,"; 
-						}?>
-					</td>
-					<td><?php echo $runde['arrangoer']; ?></td>
-					<td><?php echo $runde['tilmeldingsstart']; ?></td>
-				</tr>
-				<?php
-				}
-				?>
-			</table>
-		</center>
-	</body>
-</HTML>
+        <body>
+                
+                <h1>Runder</h1>
+                
+ <center>               
+                <?php
+                        // connect to the database
+                        
+                        // get the records from the database
+                        if ($result = $mysqli->query("SELECT * FROM runder"))
+                        {
+                                // display records if there are records to display
+                                if ($result->num_rows > 0)
+                                {
+                                        // display records in a table
+                                        echo "<table border='1' cellpadding='10'>";
+                                        
+                                        // set table headers
+                                        echo "	<tr><th>Navn</th>
+												<th>Dato</th>
+												<th>Arrangoer</th>
+												<th>Tilmeldingsstart</th> ";
+                                        
+                                        while ($row = $result->fetch_object())
+                                        {
+                                                // set up a row for each record
+                                                echo "<tr>";
+                                                echo "<td>" . $row->rundeNavn. "</td>";
+                                                echo "<td>" . $row->dato. "</td>";
+                                                echo "<td>" . $row->arrangoer . "</td>";
+                                                echo "<td>" . $row->tilmeldingsstart . "</td>";
+                                                echo "</tr>";
+                                        }
+                                        
+                                        echo "</table>";
+                                }
+                                // if there are no records in the database, display an alert message
+                                else
+                                {
+                                        echo "Ingen informationer tilgaengelige!";
+                                }
+                        }
+                        // show an error if there is an issue with the database query
+                        else
+                        {
+                                echo "Error: " . $mysqli->error;
+                        }
+                        
+                        // close database connection
+                        $mysqli->close();
+                
+                ?>
+                </center>
+        </body>
+</html>

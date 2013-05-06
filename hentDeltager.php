@@ -17,14 +17,6 @@ exit;
 
 }
 
-	// Create connection
-	$username = '846259_admin';
-	$password = '123456';
-	$host = 'baneturnering.zymichost.com';
-	$db = 'baneturnering_zymichost_atl1ik';
-	try {
-    		$con = new PDO('mysql:host=baneturnering_zymichost_atl1ik;dbname='.$db, $username, $password);
-	}
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();

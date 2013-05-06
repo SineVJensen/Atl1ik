@@ -5,13 +5,7 @@
 session_start();
 
 
-$host = "baneturnering.zymichost.com";
 
-$username = "846259_admin";
-
-$password = "123456";
-
-$db = "baneturnering_zymichost_atl1ik";
 
 @mysql_connect($host,$username,$password) or die ("error");
 

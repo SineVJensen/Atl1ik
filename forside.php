@@ -1,10 +1,6 @@
 <?php
  /* Dokumentation: http://www.killersites.com/community/index.php?/topic/3064-basic-php-system-view-edit-add-delete-records-with-mysqli/ */
 session_start();
-$host = "baneturnering.zymichost.com";
-$username = "846259_admin";
-$password = "123456";
-$db = "baneturnering_zymichost_atl1ik";
 
 // connect to the database
 $mysqli = new mysqli($host, $username, $password, $db);

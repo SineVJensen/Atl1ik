@@ -1,15 +1,7 @@
 <?
 	//overflødig fil
 
-	// Create connection
-	$username = 'atl1ik';
-	$password = '1234';
-	$host = 'localhost';
-	$db = 'atl1ik';
 
-	try {
-    		$con = new PDO('mysql:host=localhost;dbname='.$db, $username, $password);
-	}
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();

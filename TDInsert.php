@@ -1,11 +1,5 @@
 <?php
-$host = "baneturnering.zymichost.com";
 
-$username = "846259_admin";
-
-$password = "123456";
-
-$db = "baneturnering_zymichost_atl1ik";
 $con = new mysqli($host, $username, $password, $db);
 
 // Check connection

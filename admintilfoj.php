@@ -1,8 +1,5 @@
 <?php
-	$username = 'atl1ik';
-	$password = '1234';
-	$host = 'localhost';
-
+	
 
   // Check connection
   if (mysqli_connect_errno($con)) {

@@ -49,7 +49,7 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                         // connect to the database
                         
                         // get the records from the database
-                        if ($result = $mysqli->query("SELECT * FROM runder"))
+                        if ($result = $mysqli->query("SELECT t1.*, t2.distance FROM runder t1 INNER JOIN distancer t2 ON t2.rundeNavn = t1.rundeNavn"))
                         {
                                 // display records if there are records to display
                                 if ($result->num_rows > 0)
@@ -61,16 +61,18 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                                         echo "	<tr><th>Navn</th>
 												<th>Dato</th>
 												<th>Arrangoer</th>
+												<th>Distancer</th>
 												<th>Tilmeldingsstart</th> ";
                                         
                                         while ($row = $result->fetch_object())
                                         {
                                                 // set up a row for each record
                                                 echo "<tr>";
-                                                echo "<td>" . $row->rundeNavn. "</td>";
+                                                echo "<td>" . $row->runder.rundeNavn. "</td>";
                                                 echo "<td>" . $row->dato. "</td>";
                                                 echo "<td>" . $row->arrangoer . "</td>";
-                                                echo "<td>" . $row->tilmeldingsstart . "</td>";
+                                                echo "<td>" . $row->distance . "</td>";
+												echo "<td>" . $row->tilmeldingsstart . "</td>";
                                                 echo "</tr>";
                                         }
                                         

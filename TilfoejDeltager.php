@@ -1,6 +1,16 @@
 <?php
-mysql_connect("localhost", "atl1ik", "1234") or die("Connection Failed");
-mysql_select_db("atl1ik")or die("Connection Failed");
+$host = "baneturnering.zymichost.com";
+
+$username = "846259_admin";
+
+$password = "123456";
+
+$db = "baneturnering_zymichost_atl1ik";
+
+@mysql_connect($host,$username,$password) or die ("error");
+
+@mysql_select_db($db) or die("error");
+
 
 $query = "SELECT * FROM klubber";
 $result = mysql_query($query);
@@ -32,7 +42,7 @@ $result3 = mysql_query($query3);
 			<tr><td>Fornavn: <input type="text" name="fornavn"></td></tr>
 			<tr><td>Efternavn: <input type="text" name="efternavn"></td></tr>
 			<tr><td>E-mail: <input type="text" name="email"></td></tr>
-			<tr><td>Vælg Klub: <select name="klub">
+			<tr><td>V&aelig;lg Klub: <select name="klub">
 				<option value="ingen">ingen klub</option>
 				<?php
 					while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
@@ -42,7 +52,7 @@ $result3 = mysql_query($query3);
 					}
 				?>
 			</select> </td></tr>
-			<tr><td>Vælg Årgang: <select name="aargang">
+			<tr><td>V&aelig;lg &Aring;rgang: <select name="aargang">
 				<?php
 					while ($line = mysql_fetch_array($result2, MYSQL_ASSOC)){
 				?>
@@ -51,7 +61,7 @@ $result3 = mysql_query($query3);
 					}
 				?>
 			</select></td></tr>
-			<tr><td>Vælg køn: <select name="koen">
+			<tr><td>V&aelig;lg k&oslash;n: <select name="koen">
 				 <option value="m">m</option>
 				 <option value="k">k</option>
 			</select></td></tr>

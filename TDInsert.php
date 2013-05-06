@@ -1,5 +1,13 @@
 <?php
-$con=mysqli_connect("localhost","atl1ik","1234","atl1ik");
+$host = "baneturnering.zymichost.com";
+
+$username = "846259_admin";
+
+$password = "123456";
+
+$db = "baneturnering_zymichost_atl1ik";
+$con = new mysqli($host, $username, $password, $db);
+
 // Check connection
 if (mysqli_connect_errno())
   {
@@ -12,8 +20,9 @@ VALUES
 {
 die('Error: ' . mysqli_error($con));
 }
-mysql_connect("localhost", "atl1ik", "1234") or die("Connection Failed");
-mysql_select_db("atl1ik")or die("Connection Failed");
+@mysql_connect($host,$username,$password) or die ("error");
+
+@mysql_select_db($db) or die("error");
 
 if(!mysqli_query($con,"INSERT INTO deltagerinfoloeb (iddeltagerinfo, distance, tilmeldingstid, aarsbedste, pr)
 VALUES

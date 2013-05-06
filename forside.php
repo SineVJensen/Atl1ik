@@ -71,7 +71,7 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                                         {
                                                 // set up a row for each record
                                                 echo "<tr>";
-                                                echo '<td><a href="TilfoejDeltager.php=' . $row->rundeNavn. '"> '. $row->rundeNavn. '</a>&nbsp; &nbsp;</td>';
+                                                echo '<td><a href="TilfoejDeltager.php"> '. $row->rundeNavn. '</a>&nbsp; &nbsp;</td>';
                                                 echo '<td>' . $row->dato. '&nbsp; &nbsp;</td>';
                                                 echo '<td>' . $row->arrangoer . '&nbsp; &nbsp;</td>';
                                                 echo '<td>' . $row->distance . '&nbsp; &nbsp;</td>';

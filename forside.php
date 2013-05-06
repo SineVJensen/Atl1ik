@@ -38,6 +38,7 @@ mysqli_report(MYSQLI_REPORT_ERROR);
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/plugin.css?ver=1.7");
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/datatables.css?ver=1.7");
 		/* ]]> */
+
 	</style></head>
 
         <body>
@@ -59,20 +60,22 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                                         
                                         // set table headers
                                         echo "	<tr><th>Navn</th>
-												<th>Dato</th>
-												<th>Arrangoer</th>
-												<th>Distancer</th>
-												<th>Tilmeldingsstart</th> ";
+												<th>Dato &nbsp; &nbsp;</th>
+												<th>Arrangoer &nbsp; &nbsp;</th>
+												<th>Distancer &nbsp; &nbsp;</th>
+												<th>Tilmeldingsstart &nbsp; &nbsp;</th> ";
+                                        
+                                        
                                         
                                         while ($row = $result->fetch_object())
                                         {
                                                 // set up a row for each record
                                                 echo "<tr>";
-                                                echo "<td>" . $row->runder.rundeNavn. "</td>";
-                                                echo "<td>" . $row->dato. "</td>";
-                                                echo "<td>" . $row->arrangoer . "</td>";
-                                                echo "<td>" . $row->distance . "</td>";
-												echo "<td>" . $row->tilmeldingsstart . "</td>";
+                                                echo '<td><a href="TilfoejDeltager.php=' . $row->rundeNavn. '"> '. $row->rundeNavn. '</a>&nbsp; &nbsp;</td>';
+                                                echo '<td>' . $row->dato. '&nbsp; &nbsp;</td>';
+                                                echo '<td>' . $row->arrangoer . '&nbsp; &nbsp;</td>';
+                                                echo '<td>' . $row->distance . '&nbsp; &nbsp;</td>';
+																								echo '<td>' . $row->tilmeldingsstart . '</td>';
                                                 echo "</tr>";
                                         }
                                         

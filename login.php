@@ -24,7 +24,7 @@ if( mysql_num_rows($sql) != 0 ) { //success
 
 $_SESSION['logged-in'] = true;
 
-header('Location: adminforside.php');
+header('Location: adminForside.php');
 
 exit;
 
@@ -44,7 +44,7 @@ exit;
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-		<title>Atle1ik</title>
+			<title>TilmeldingBaneturnering</title>
 
 		<link rel="stylesheet" href="http://www.baneturneringen.dk/wp-content/themes/default/reset.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="http://www.baneturneringen.dk/wp-content/themes/default/style.css" type="text/css" media="screen" />

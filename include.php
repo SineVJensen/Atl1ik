@@ -6,7 +6,6 @@ session_start();
 
 
 
-
 @mysql_connect($host,$username,$password) or die ("error");
 
 @mysql_select_db($db) or die("error");

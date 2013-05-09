@@ -18,4 +18,5 @@ unset($_SESSION['logged-in']);
 
 header('Location: index.html');
 
+// 
 ?>

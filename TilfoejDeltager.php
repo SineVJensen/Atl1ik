@@ -15,6 +15,7 @@ $result3 = mysql_query($query3);
 ?>
 
 <HTML xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+	<body>
 
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -50,11 +51,12 @@ $result3 = mysql_query($query3);
 	<br />
 	<center>
 	<!-- sender de indtastede info'er videre til deltagerliste som indsætter det i databasen -->
-	<form action="TDInsert.php" method="post">
+	<form action="deltagerMellem.php" method="post">
 		<table>
 			<tr><td>Fornavn: <input type="text" name="fornavn"></td></tr>
 			<tr><td>Efternavn: <input type="text" name="efternavn"></td></tr>
 			<tr><td>E-mail: <input type="text" name="email"></td></tr>
+			
 			<tr><td>V&aelig;lg Klub: <select name="klub">
 				<option value="ingen">ingen klub</option>
 				<?php
@@ -65,7 +67,9 @@ $result3 = mysql_query($query3);
 					}
 				?>
 			</select> </td></tr>
-			<tr><td>V&aelig;lg &Aring;rgang: <select name="aargang">
+			
+			<tr><td>V&aelig;lg &Aring;rgang: 
+			<select name="aargang">
 				<?php
 					while ($line = mysql_fetch_array($result2, MYSQL_ASSOC)){
 				?>
@@ -74,11 +78,15 @@ $result3 = mysql_query($query3);
 					}
 				?>
 			</select></td></tr>
-			<tr><td>V&aelig;lg k&oslash;n: <select name="koen">
+			
+			<tr><td>V&aelig;lg k&oslash;n: 
+			<select name="koen">
 				 <option value="m">m</option>
 				 <option value="k">k</option>
 			</select></td></tr>
+			
 			<tr><td>Rundenavn: <input type="text" name="rundenavn"></td></tr>
+
 			<tr><td>Distance:
 					<select name="distance">
 				<?php
@@ -89,13 +97,16 @@ $result3 = mysql_query($query3);
 				<?php
 					}
 				?>
-			</select></td></tr>
+			</td></tr>
+
+			
 			<tr><td>Tilmeldingstid: <input type="text" name="tilmeldingstid"></td></tr>
+			
 			<tr><td>Aarsbedste: <input type="text" name="aarsbedste"></td></tr>
+			
 			<tr><td>pr: <input type="text" name="pr"></td></tr>
 		</table>
-	<input type="submit">
+		
+	<input type="submit" value = "N&aelig;ste" style="width:190px;" ;>
 	</form>
 	</center>
-</body>
-</html>

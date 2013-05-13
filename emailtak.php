@@ -1,22 +1,31 @@
 <?php
 	// Create connection
+$con = new mysqli($host, $username, $password, $db);
+
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+if(!mysqli_query($con,"INSERT INTO email (email, navn)
+VALUES
+('$_POST[email]','$_POST[navn]')"))
+{
+die('Error: ' . mysqli_error($con));
+}
+@mysql_connect($host,$username,$password) or die ("error");
+
+@mysql_select_db($db) or die("error");
 
 
-	try {
-    		$con = new PDO('mysql:host=localhost;dbname='.$db, $username, $password);
-	}
-	catch (PDOException $e) {
-		print "Error!: " . $e->getMessage() . "<br/>";
-		die();
-	}
-
-
+mysqli_close($con);
 ?>
 <HTML xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 
-	<head>profile="http://gmpg.org/xfn/11">
+	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		<title>Skal kunne skrive RUNDE NAVN</title>
+		<title>TilmeldingBaneturnering</title>
 
 		<link rel="stylesheet" href="http://www.baneturneringen.dk/wp-content/themes/default/reset.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="http://www.baneturneringen.dk/wp-content/themes/default/style.css" type="text/css" media="screen" />
@@ -38,8 +47,15 @@
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/datatables.css?ver=1.7");
 		/* ]]> */
 	</style></head>
-	<body>
-		Tak for din tilmelding. Du vil snarest muligt modtage din bekræftelsesmail på "SKRIV DEN MAIL DE LIGE HAR ANGIVET"
+	<br><br><br><br><br><br><br><br> <h1> Tak for din tilmelding </h1>
+		Du vil snarest muligt modtage din bekræftelsesmail på  <?php echo $_POST["email"]; ?> 
+		<br>
+		<br>
+		<br>
+		<form action="index.html" method="get">
+			<button type="submit" formation="index.html" style="height: 50px; width: 190px;font-size:20px;"> Gå tilbage til forsiden
+			</button>
+		</form>
 	</body>
 
 

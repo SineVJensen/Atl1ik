@@ -1,22 +1,16 @@
 <?php 
 
-	try {
-    		$con = new PDO('mysql:host=localhost;dbname='.$db, $username, $password);
-	}
-	catch (PDOException $e) {
-		print "Error!: " . $e->getMessage() . "<br/>";
-		die();
-	}
+@mysql_connect($host,$username,$password) or die ("error");
 
+@mysql_select_db($db) or die("error");
 
 ?>
 <HTML xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 
-	<head>profile="http://gmpg.org/xfn/11">
+	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-		
-		<title>Skal hente runde navn </title>
-		
+		<title>TilmeldingBaneturnering</title>
+
 		<link rel="stylesheet" href="http://www.baneturneringen.dk/wp-content/themes/default/reset.css" type="text/css" media="screen" />
 		<link rel="stylesheet" href="http://www.baneturneringen.dk/wp-content/themes/default/style.css" type="text/css" media="screen" />
 		<link rel="pingback" href="http://www.baneturneringen.dk/xmlrpc.php" />
@@ -36,12 +30,13 @@
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/plugin.css?ver=1.7");
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/datatables.css?ver=1.7");
 		/* ]]> */
+
 	</style></head>
 
 	<body>
 	<center>
-		<H1>Rundenavn</H1>
-		<form action="insert.php" method="post">
+		<H1>Email til bekræftigelse</H1>
+		<form action="emailTak.php" method="post">
 			<table>
 				<tr>
 					<td>Navn
@@ -56,13 +51,8 @@
 					</td>
 				</tr>
 				<tr>
-				<td>
-					<input type="checkbox" name="jatak" value="yes"> Jeg &oslash;nsker at modtage informationer om fremtidige st&aelig;vner fra KIF-Atletik, pr. Email.
-				</td>
-				</tr>
-				<tr>
 					<td colspan=2 align= center>
-						<input type="button" value="Send tilmelding" style="width:190px;">
+						<input type="submit" formation="emailTak.php" value="Send tilmelding" style="width:190px;" onClick="location.href='emailTak.php'">
 					</td>
 				</tr>
 			</table>

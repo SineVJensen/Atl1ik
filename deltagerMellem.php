@@ -2,12 +2,34 @@
 	// Create connection
 
 	
-	
-$con = mysqli_connect($host, $username, $password, $db);
+$con = new mysqli($host, $username, $password, $db);
 
-	if (!$con) {
-	    die('Connect Error: ' . mysqli_connect_errno());
-	}
+// Check connection
+if (mysqli_connect_errno())
+  {
+  echo "Failed to connect to MySQL: " . mysqli_connect_error();
+  }
+
+if(!mysqli_query($con,"INSERT INTO deltagerinfo (fornavn, efternavn, email, klub, aargang, koen, rundenavn)
+VALUES
+('$_POST[fornavn]','$_POST[efternavn]','$_POST[email]','$_POST[klub]','$_POST[aargang]','$_POST[koen]','$_POST[rundenavn]')"))
+{
+die('Error: ' . mysqli_error($con));
+}
+@mysql_connect($host,$username,$password) or die ("error");
+
+@mysql_select_db($db) or die("error");
+
+if(!mysqli_query($con,"INSERT INTO deltagerinfoloeb (iddeltagerinfo, distance, tilmeldingstid, aarsbedste, pr)
+VALUES
+(". mysqli_insert_id($con) . ",'$_POST[distance]','$_POST[tilmeldingstid]','$_POST[aarsbedste]','$_POST[pr]')"))
+{
+die('Error: ' . mysqli_error($con));
+}
+
+
+
+mysqli_close($con);
 
 ?>
 <HTML xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
@@ -41,8 +63,8 @@ $con = mysqli_connect($host, $username, $password, $db);
 <center>
 <br><br><br><br><br><br><br><br> <h1>Vil du tilmelde flere deltagere eller vil du afslutte din tilmelding?</h1> <br>
 	Hvis du vil tilmelde endnu deltager til denne runde. Tryk her <br> <br>
-		<form action="tilfoejDeltager.php" method="get">
-			<button type="submit" formation="tilfoejDeltager.php" style="height: 50px; width: 190px;font-size:20px;"> Gå til tilmelding
+		<form action="TilfoejDeltager.php" method="get">
+			<button type="submit" formation="TilfoejDeltager.php" style="height: 50px; width: 190px;font-size:20px;"> Gå til tilmelding
 			</button>
 		</form>
 		<br> <br>

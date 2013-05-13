@@ -2,6 +2,7 @@
  /* Dokumentation: http://www.killersites.com/community/index.php?/topic/3064-basic-php-system-view-edit-add-delete-records-with-mysqli/ */
 session_start();
 
+
 // connect to the database
 $mysqli = new mysqli($host, $username, $password, $db);
 
@@ -46,7 +47,7 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                         // connect to the database
                         
                         // get the records from the database
-                        if ($result = $mysqli->query("SELECT t1.*, t2.distance FROM runder t1 INNER JOIN distancer t2 ON t2.rundeNavn = t1.rundeNavn"))
+                        if ($result = $mysqli->query("SELECT * FROM runder"))
                         {
                                 // display records if there are records to display
                                 if ($result->num_rows > 0)
@@ -58,7 +59,6 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                                         echo "	<tr><th>Navn</th>
 												<th>Dato &nbsp; &nbsp;</th>
 												<th>Arrangoer &nbsp; &nbsp;</th>
-												<th>Distancer &nbsp; &nbsp;</th>
 												<th>Tilmeldingsstart &nbsp; &nbsp;</th> ";
                                         
                                         
@@ -70,7 +70,6 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                                                 echo '<td><a href="TilfoejDeltager.php"> '. $row->rundeNavn. '</a>&nbsp; &nbsp;</td>';
                                                 echo '<td>' . $row->dato. '&nbsp; &nbsp;</td>';
                                                 echo '<td>' . $row->arrangoer . '&nbsp; &nbsp;</td>';
-                                                echo '<td>' . $row->distance . '&nbsp; &nbsp;</td>';
 																								echo '<td>' . $row->tilmeldingsstart . '</td>';
                                                 echo "</tr>";
                                         }
@@ -92,7 +91,8 @@ mysqli_report(MYSQLI_REPORT_ERROR);
                         // close database connection
                         $mysqli->close();
                 
-                ?>
+                ?> <br> <br> <br>
+                Gå ind på http://www.baneturneringen.dk for at se distancerne til hver runde.
                 </center>
         </body>
 </html>

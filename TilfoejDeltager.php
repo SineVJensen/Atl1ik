@@ -1,22 +1,41 @@
 <?php
 
-
 @mysql_connect($host,$username,$password) or die ("error");
 
 @mysql_select_db($db) or die("error");
 
-
 $query = "SELECT * FROM klubber";
 $result = mysql_query($query);
+
 $query2 = "SELECT * FROM aargang";
 $result2 = mysql_query($query2);
-$query3 = "SELECT * FROM distancer";
+
+$query3 = "SELECT rundeNavn, distance FROM runder natural join distancer ORDER BY rundeNavn ASC;";
 $result3 = mysql_query($query3);
+
+$query5 = "SELECT * FROM runder ORDER BY rundeNavn ASC";
+$result5 = mysql_query($query5);
 ?>
 
 <HTML xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 	<body>
+<script>
+function validateForm()
+{
+var x=document.forms["myForm"]["fornavn", "efternavn", "email"].value;
+if (x==null || x=="")
+  {
+  alert("De er ikke f&aelig;rdig med at udfylde din tilmelding");
 
+  return false;
+  }
+}
+
+
+</script>
+<script type="text/javascript>">
+
+</script>
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 		<title>TilmeldingBaneturnering</title>
@@ -40,8 +59,8 @@ $result3 = mysql_query($query3);
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/plugin.css?ver=1.7");
 			@import url("http://www.baneturneringen.dk/wp-content/plugins/wp-table-reloaded/css/datatables.css?ver=1.7");
 		/* ]]> */
-
-	</style></head>
+		
+	</style></head></body>
 	
 
 		<h1>
@@ -49,15 +68,23 @@ $result3 = mysql_query($query3);
 		</h1>
 
 	<br />
-	<center>
+	
 	<!-- sender de indtastede info'er videre til deltagerliste som indsætter det i databasen -->
-	<form action="deltagerMellem.php" method="post">
-		<table>
-			<tr><td>Fornavn: <input type="text" name="fornavn"></td></tr>
-			<tr><td>Efternavn: <input type="text" name="efternavn"></td></tr>
-			<tr><td>E-mail: <input type="text" name="email"></td></tr>
+	<form name="myForm" action="deltagerMellem.php" onsubmit="return validateForm();" method="post">
+		<center><table width ="200px" border="0">
+			<tr><td>Fornavn:</td>
+			<tr><td><input type="text" name="fornavn" size="40" ></td></tr></tr>		
 			
-			<tr><td>V&aelig;lg Klub: <select name="klub">
+			<tr><td>Efternavn: <td/>
+			<tr><td><input type="text" name="efternavn" size="40" ></td></tr></tr>
+			
+			<tr><td>E-mail: </td>
+			<tr><td><input type="text" name="email" size="40"></td></tr></tr>
+			
+			<tr><td></tr></td>
+			<tr><td>V&aelig;lg Klub: </td>
+			<tr><td><select name="klub" >
+				<option value="" disabled="disabled">V&aelig;lg klub</option>
 				<option value="ingen">ingen klub</option>
 				<?php
 					while ($line = mysql_fetch_array($result, MYSQL_ASSOC)) {
@@ -66,10 +93,13 @@ $result3 = mysql_query($query3);
 				<?php
 					}
 				?>
-			</select> </td></tr>
+			</select></td></tr></tr>
 			
-			<tr><td>V&aelig;lg &Aring;rgang: 
-			<select name="aargang">
+			<tr><td></tr></td>			
+			
+			<tr><td>V&aelig;lg &Aring;rgang: </td>
+			<tr><td><select name="aargang" >
+			<option value="" disabled="disabled">V&aelig;lg &Aring;rgang</option>
 				<?php
 					while ($line = mysql_fetch_array($result2, MYSQL_ASSOC)){
 				?>
@@ -77,36 +107,65 @@ $result3 = mysql_query($query3);
 				<?php
 					}
 				?>
-			</select></td></tr>
+			</select></td></tr></tr>
 			
-			<tr><td>V&aelig;lg k&oslash;n: 
-			<select name="koen">
+			<tr><td></tr></td>
+			
+			<tr><td>V&aelig;lg k&oslash;n: </td>
+			<tr><td><select name="koen" >
+			<option value="" disabled="disabled">V&aelig;lg k&oslash;n</option>
 				 <option value="m">m</option>
 				 <option value="k">k</option>
-			</select></td></tr>
+			</select></td></tr></tr>
 			
-			<tr><td>Rundenavn: <input type="text" name="rundenavn"></td></tr>
-
-			<tr><td>Distance:
-					<select name="distance">
+			<tr><td></tr></td>
+			
+			<tr><td>Rundenavn </td>
+			<tr><td><select name="rundeNavn">
+				<option value="" disabled="disabled" >V&aelig;lg rundnavn</option>
 				<?php
-					while ($line = mysql_fetch_array($result3, MYSQL_ASSOC)) {
+					while ($line = mysql_fetch_array($result5, MYSQL_ASSOC)) {
 				?>
-					<option value="<?php echo $line['distance'];?>"> <?php echo $line['distance'];?> </option>
+					<option value="<?php echo $line['rundeNavn'];?>"><?php echo $line['rundeNavn'];?> </option>
 
 				<?php
 					}
 				?>
-			</td></tr>
+				</select></td></tr></tr>
+			<tr><td></tr></td>
+			
+			<tr><td>Distance: </td>
+			<tr><td><select name="distance">
+				<option value="" disabled="disabled" >V&aelig;lg distance</option>
+				<?php
+					while ($line = mysql_fetch_array($result3, MYSQL_ASSOC)) {
+				?>
+					<option value="<?php echo $line['distance'];?>"><?php echo $line['distance'];?> </option>
 
+				<?php
+					}
+				?>
+			</select>m</td></tr></tr>
+			<tr><td><b>NB! Tiderne udfyldes med min:sek:msek fx. 00:20:13</b></td></tr>
 			
-			<tr><td>Tilmeldingstid: <input type="text" name="tilmeldingstid"></td></tr>
+			<tr><td></tr></td>
 			
-			<tr><td>Aarsbedste: <input type="text" name="aarsbedste"></td></tr>
+			<tr><td>Tilmeldingstid: </td>
+			<tr><td><input type="text" name="tilmeldingstid" size="40"></td></tr></tr>
 			
-			<tr><td>pr: <input type="text" name="pr"></td></tr>
-		</table>
+			<tr><td></tr></td>
+			
+			<tr><td>Aarsbedste: </td>
+			<tr><td><input type="text" name="aarsbedste" size="40"></td></tr></tr>
+			
+			<tr><td></tr></td>
+			
+			<tr><td>pr: </td>
+			<tr><td><input type="text" name="pr" size="40" ></td></tr></tr>
+		</table></center>
+
 		
 	<input type="submit" value = "N&aelig;ste" style="width:190px;" ;>
 	</form>
-	</center>
+
+	
